@@ -1,0 +1,20 @@
+# Dependencies for both case studies. Versions pinned to the study environment
+# (Python 3.14.5).
+#
+# Case study 1, and the test suites, run cross-platform on the base set below.
+# Case study 2's real Aspen Plus V14 backend additionally needs Windows + an
+# Aspen Plus V14 desktop install; its COM bridge uses pywin32, which the platform
+# marker installs only on Windows (so this single file works on every platform).
+
+numpy==2.4.6
+scipy==1.17.1
+scikit-learn==1.8.0
+matplotlib==3.10.9
+anthropic==0.105.0      # imported at module load; only CALLS the API on the live path
+mcp==1.27.2             # Model Context Protocol tool-use grounding (core/mcp_bridge.py, mcp_server.py)
+fastembed==0.8.0        # dense RAG embedding channel, RAG_DENSE=1 (core/embeddings.py)
+onnxruntime==1.26.0     # fastembed's ONNX backend (transitive; pinned for reproducibility)
+pytest==9.0.3           # to run the test suites
+pytest-timeout==2.4.0   # hard per-test cap (see pytest.ini)
+
+pywin32==311 ; sys_platform == "win32"   # case study 2 only: Aspen Plus V14 COM bridge (Windows)
